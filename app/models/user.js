@@ -9,7 +9,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    token: String
+    token: String,
+    post: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post'
+    }
 }, {
     timestamps: true,
     toObject: {

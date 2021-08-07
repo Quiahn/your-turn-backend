@@ -6,7 +6,7 @@ const db = require('./config/db')
 const auth = require('./lib/auth')
 
 // IMPORTING ROUTES
-const exampleRoutes = require('./app/routes/example_routes')
+const postRoutes = require('./app/routes/post_routes')
 const userRoutes = require('./app/routes/user_routes')
 
 // MIDDLEWARE
@@ -36,7 +36,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(requestLogger)
 
 // USING ROUTES
-app.use(exampleRoutes)
+app.use(postRoutes)
 app.use(userRoutes)
 
 // ERROR HANDLING

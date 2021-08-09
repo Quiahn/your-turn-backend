@@ -25,6 +25,17 @@ const requireToken = passport.authenticate('bearer', { session: false })
 // instantiate a router (mini app that only handles routes)
 const router = express.Router()
 
+router.get('/users', (req, res, next) => {
+    User.find()
+        .then(users => {
+            return users.map(user => user.username)
+        })
+        // respond with status 200 and JSON of the users
+        .then(users => res.status(200).json({ users: users }))
+        // if an error occurs, pass it to the handler
+        .catch(next)
+})
+
 // SIGN UP
 // POST /sign-up
 router.post('/sign-up', (req, res, next) => {

@@ -1,13 +1,11 @@
 const mongoose = require('mongoose')
 
 const postSchema = new mongoose.Schema({
-    date: {
-        type: Date,
-        required: true
-    },
     content: {
         type: String,
-        required: true
+    },
+    number: {
+        type: Number,
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,

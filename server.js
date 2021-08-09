@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const db = require('./config/db')
 const auth = require('./lib/auth')
+const cron = require('node-cron')
 
 // IMPORTING ROUTES
 const postRoutes = require('./app/routes/post_routes')
@@ -23,7 +24,15 @@ mongoose.connect(db, {
     useCreateIndex: true,
     useUnifiedTopology: true
 })
-console.log(db)
+
+// SCHEDULING
+const date = new Date
+console.log('Hour', date.getHours(), 'Minute', date.getMinutes(), 'Second', date.getSeconds())
+cron.schedule('* 0 * * *', function () {
+    console.log('RESTARTED');
+    mongoose.connection.db.dropCollection('posts')
+});
+
 // DEFINING VARIABLES
 const app = express()
 const port = process.env.PORT || serverDevPort

@@ -28,9 +28,10 @@ mongoose.connect(db, {
 // SCHEDULING
 const date = new Date
 console.log('Hour', date.getHours(), 'Minute', date.getMinutes(), 'Second', date.getSeconds())
-cron.schedule('* 0 * * *', function () {
+cron.schedule('0 0 0 * * *', function () {
     console.log('RESTARTED');
     mongoose.connection.db.dropCollection('posts')
+        .catch(() => console.log('DID\'T WORK'))
 });
 
 // DEFINING VARIABLES
